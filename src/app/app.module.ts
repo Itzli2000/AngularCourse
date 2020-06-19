@@ -1,3 +1,4 @@
+import { LoginService } from './servicios/login.service';
 import { ClienteServicio } from './servicios/cliente.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -43,7 +44,8 @@ import { PiePaginaComponent } from './componentes/pie-pagina/pie-pagina.componen
     FlashMessagesModule.forRoot(),
   ],
   providers: [
-    ClienteServicio
+    ClienteServicio,
+    LoginService,
   ],
   bootstrap: [AppComponent]
 })
