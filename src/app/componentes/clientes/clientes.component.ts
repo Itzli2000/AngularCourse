@@ -19,7 +19,7 @@ export class ClientesComponent implements OnInit {
   }
 
   constructor(private clientesServicio: ClienteServicio,
-              private flashMessages: FlashMessagesService) { }
+    private flashMessages: FlashMessagesService) { }
 
   ngOnInit() {
     this.clientesServicio.getClientes().subscribe(
@@ -39,15 +39,15 @@ export class ClientesComponent implements OnInit {
     return saldoTotal;
   }
 
-  agregar({value, valid}: {value: Cliente, valid: boolean}) {
+  agregar({ value, valid }: { value: Cliente, valid: boolean }) {
     if (!valid) {
       this.flashMessages.show('Por favor llenar el formulario correctamente', {
         cssClass: 'alert-danger',
         timeout: 4000
       });
-    }
-    else {
+    } else {
       // Agregar el nuevo cliente
+      this.clientesServicio.agregarCliente(value);
     }
   }
 
