@@ -1,3 +1,4 @@
+import { ConfiguracionGuard } from './componentes/guardianes/configuracion.guard';
 import { NoEncontradoComponent } from './componentes/no-encontrado/no-encontrado.component';
 import { EditarClienteComponent } from './componentes/editar-cliente/editar-cliente.component';
 import { ConfiguracionComponent } from './componentes/configuracion/configuracion.component';
@@ -12,7 +13,7 @@ import { AuthGuard } from './componentes/guardianes/auth.guard';
 const routes: Routes = [
   { path: '', component: TableroComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'registrarse', component: RegistroComponent },
+  { path: 'registrarse', component: RegistroComponent, canActivate: [ConfiguracionGuard] },
   { path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard] },
   { path: 'cliente/editar/:id', component: EditarClienteComponent, canActivate: [AuthGuard] },
   { path: '**', component: NoEncontradoComponent },
