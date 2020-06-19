@@ -1,7 +1,8 @@
 import { ClienteServicio } from './../../servicios/cliente.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Cliente } from 'src/app/modelo/cliente.model';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-clientes',
@@ -16,10 +17,13 @@ export class ClientesComponent implements OnInit {
     apellido: '',
     email: '',
     saldo: 0
-  }
+  };
+
+  @ViewChild('clienteForm', {static: false}) clienteForm: NgForm;
+  @ViewChild('botonCerrar', {static: false}) botonCerrar: ElementRef;
 
   constructor(private clientesServicio: ClienteServicio,
-    private flashMessages: FlashMessagesService) { }
+              private flashMessages: FlashMessagesService) { }
 
   ngOnInit() {
     this.clientesServicio.getClientes().subscribe(
@@ -30,7 +34,7 @@ export class ClientesComponent implements OnInit {
   }
 
   getSaldoTotal() {
-    let saldoTotal: number = 0;
+    let saldoTotal = 0;
     if (this.clientes) {
       this.clientes.forEach(cliente => {
         saldoTotal += cliente.saldo;
@@ -46,9 +50,14 @@ export class ClientesComponent implements OnInit {
         timeout: 4000
       });
     } else {
-      // Agregar el nuevo cliente
       this.clientesServicio.agregarCliente(value);
+      this.clienteForm.resetForm();
+      this.cerrarModal();
     }
+  }
+
+  private cerrarModal() {
+    this.botonCerrar.nativeElement.click();
   }
 
 }
