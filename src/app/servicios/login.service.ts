@@ -5,19 +5,27 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class LoginService {
 
-  constructor(private authService: AngularFireAuth) {}
+  constructor(private authService: AngularFireAuth) { }
 
   login(email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.authService.signInWithEmailAndPassword(email, password)
-      .then( datos => resolve(datos),
-             error => reject(error));
+        .then(datos => resolve(datos),
+          error => reject(error));
+    });
+  }
+
+  registrarse(email: string, password: string) {
+    return new Promise((resolve, reject) => {
+      this.authService.createUserWithEmailAndPassword(email, password)
+        .then(datos => resolve(datos),
+          error => reject(error.message));
     });
   }
 
   getAuth() {
     return this.authService.authState.pipe(
-      map( auth => auth )
+      map(auth => auth)
     );
   }
 

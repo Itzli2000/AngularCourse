@@ -6,14 +6,15 @@ import { LoginComponent } from './componentes/login/login.component';
 import { TableroComponent } from './componentes/tablero/tablero.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './componentes/guardianes/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: TableroComponent },
+  { path: '', component: TableroComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registrarse', component: RegistroComponent },
-  { path: 'configuracion', component: ConfiguracionComponent },
-  { path: 'cliente/editar/:id', component: EditarClienteComponent },
+  { path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard] },
+  { path: 'cliente/editar/:id', component: EditarClienteComponent, canActivate: [AuthGuard] },
   { path: '**', component: NoEncontradoComponent },
 ];
 

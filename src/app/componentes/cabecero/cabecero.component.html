@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav ml-auto mr-3">
       <li *ngIf="isLoggedIn" class="nav-item active">
-        <a class="nav-link" routerLink="/">Inicio</a>
+        <a class="nav-link" routerLink="/" routerLinkActive="active">Inicio</a>
       </li>
       <li *ngIf="isLoggedIn" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -16,12 +16,17 @@
           <i class="fa fa-user"></i>&nbsp;Bienvenido {{loggedInUser}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/configuracion"><i class="fa fa-cog"></i>&nbsp;Configuración</a>
+          <a class="dropdown-item" routerLink="/configuracion"  routerLinkActive="active"><i class="fa fa-cog"></i>&nbsp;Configuración</a>
         </div>
       </li>
-      <li *ngIf="!isLoggedIn" class="nav-item">
-        <a routerLink="/login" class="nav-link">
+      <li *ngIf="!isLoggedIn && permitirRegistro" class="nav-item">
+        <a routerLink="/login" class="nav-link"  routerLinkActive="active">
           <i class="fa fa-user"></i>&nbsp;Login
+        </a>
+      </li>
+      <li *ngIf="!isLoggedIn && permitirRegistro" class="nav-item">
+        <a routerLink="/registrarse" class="nav-link"  routerLinkActive="active">
+          <i class="fa fa-user"></i>&nbsp;Registro
         </a>
       </li>
       <li *ngIf="isLoggedIn" class="nav-item">
